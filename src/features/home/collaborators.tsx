@@ -12,7 +12,7 @@ export default function Collaborators() {
           error ipsum porro vero quod veritatis atque sapiente ipsa consectetur
           ex quas sunt eos quidem ipsam sit vitae qui corrupti laboriosam
           distinctio velit. Molestiae sapiente dignissimos sint dolores
-          exercitationem.
+          exercitationem. hello
         </div>
       </div>
     </div>
