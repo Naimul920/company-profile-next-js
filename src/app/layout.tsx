@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="en" className={saira.className}>
       <body className="antialiased ">
         {children}
+        
         </body>
     </html>
   );
