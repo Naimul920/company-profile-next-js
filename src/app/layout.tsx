@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Saira } from "next/font/google";
 import "./globals.css";
-
+import Navbar from "@/features/layout/navbar";
+import Footer from "@/features/layout/footer";
 
 const saira = Saira({
   subsets: ["latin"],
@@ -20,10 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={saira.className}>
-      <body className="antialiased ">
+      <body className={`${saira.className} antialiased text-white bg-brand-dark pt-20`}>
+        <Navbar />
         {children}
-        
-        </body>
+        <Footer />
+      </body>
     </html>
   );
 }
