@@ -33,7 +33,7 @@ export default function Collaborators() {
   ];
 
   return (
-    <div className="bg-[#1B1F23] py-10">
+    <div className="bg-brand-two py-10 ">
       <div className="lg:max-w-[calc(100%-8rem)] px-5 lg:px-0 mx-auto flex flex-col lg:flex-row items-start lg:items-center  h-auto ">
         {/* Left title */}
         <div className="lg:border-r border-gray-700/50 w-full lg:w-3/12 text-3xl font-extrabold p-5 text-white leading-tight px-5">

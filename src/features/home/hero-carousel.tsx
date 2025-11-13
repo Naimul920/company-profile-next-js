@@ -60,7 +60,7 @@ export default function HeroCarousel() {
       </div>
 
       {/* Main layout container */}
-      <div className="mx-auto  pt-20 border-gray-700/50 lg:max-w-[calc(100%-8rem)] lg:border-x">
+      <div className="mx-auto  border-gray-700/50 lg:max-w-[calc(100%-8rem)] lg:border-x">
         {/* Right social icons */}
         <div className="absolute right-2 top-1/2 z-30 -translate-y-1/2">
           <SocialLinks
