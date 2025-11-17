@@ -13,7 +13,7 @@ import "swiper/css/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 // import { ChevronLeft, ChevronRight } from "lucide-react";
-import { FaArrowRight, FaArrowLeft  } from "react-icons/fa6";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa6";
 
 // demo images – you can replace these
 import hero1 from "@/assets/img/home-3/home3-banner-img.png";
@@ -87,7 +87,6 @@ export default function SolutionsCarousel() {
   return (
     <section className="relative  py-20">
       <div className="mx-auto w-full max-w-[1200px] px-4 lg:px-0">
-        {/* Heading + arrows row */}
         <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
           <div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
@@ -100,7 +99,6 @@ export default function SolutionsCarousel() {
             </p>
           </div>
 
-          {/* arrows (desktop & tablet; show bottom on mobile if you like) */}
           <div className="flex items-center gap-3">
             <Button
               ref={prevRef}
@@ -109,7 +107,7 @@ export default function SolutionsCarousel() {
               className="h-10 w-10 rounded-full border-emerald-400 bg-transparent text-emerald-400 hover:bg-emerald-500/10"
               aria-label="Previous solution"
             >
-              <FaArrowLeft  className="h-5 w-5" />
+              <FaArrowLeft className="h-5 w-5" />
             </Button>
             <Button
               ref={nextRef}
@@ -122,8 +120,6 @@ export default function SolutionsCarousel() {
             </Button>
           </div>
         </div>
-
-        {/* Swiper */}
         <Swiper
           modules={[Navigation]}
           spaceBetween={24}
@@ -159,15 +155,13 @@ function SolutionCard({ solution }: { solution: Solution }) {
   return (
     <article
       className={cn(
-        "group relative h-full rounded-2xl border border-white/5 bg-gradient-to-br from-[#050814] via-[#050814] to-[#020617] p-8 text-left text-white shadow-[0_0_40px_rgba(0,0,0,0.45)]",
+        "group relative h-full rounded-2xl border border-white/5 bg-linear-to-br from-[#050814] via-[#050814] to-[#020617] p-8 text-left text-white shadow-[0_0_40px_rgba(0,0,0,0.45)]",
         "transition-transform duration-300 hover:-translate-y-1 hover:border-emerald-500/60"
       )}
     >
-      {/* glow gradient background */}
       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.16),transparent_55%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="relative z-10 flex flex-col gap-5">
-        {/* icon / image */}
         <div className="inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl border border-emerald-400/50 bg-emerald-500/5">
           <div className="relative h-10 w-10">
             <Image
@@ -192,7 +186,7 @@ function SolutionCard({ solution }: { solution: Solution }) {
         <ul className="mt-4 space-y-2 text-sm">
           {solution.bullets.map((item) => (
             <li key={item} className="flex items-start gap-2">
-              <span className="mt-[6px] inline-block h-2 w-2 rounded-full bg-emerald-400" />
+              <span className="mt-1.5 inline-block h-2 w-2 rounded-full bg-emerald-400" />
               <span className="font-medium text-white/90">{item}</span>
             </li>
           ))}
