@@ -68,6 +68,7 @@ export default function Collaborators() {
                       alt="separator icon"
                       width={25}
                       height={25}
+                      quality={90}
                       className="object-contain inline-flex shrink-0 opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                       priority
                     />
@@ -77,8 +78,10 @@ export default function Collaborators() {
                       alt={`Collaborator logo ${index + 1}`}
                       height={40}
                       width={120}
+                      quality={90}
                       className="inline-flex shrink-0 object-contain opacity-70 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                       priority
+                      
                     />
                   )}
                 </div>

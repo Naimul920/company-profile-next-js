@@ -12,40 +12,45 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <div className="bg-brand-two px-5">
-      <div className=" py-10 max-w-7xl mx-auto">
-        <div className="flex justify-between items-start flex-col sm:flex-row gap-10 py-5  ">
+      <div className="py-10 max-w-7xl mx-auto">
+        {/* Top: Logo + Phone */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 sm:gap-10 py-5">
           <Logo />
-          <div className="flex gap-2 justify-center items-center">
-            <FiPhoneCall className="text-brand size-10" />
-            <div>
+          <div className="flex gap-3 sm:gap-4 justify-start sm:justify-center items-center">
+            <FiPhoneCall className="text-brand size-8 sm:size-10" />
+            <div className="text-sm sm:text-base">
               <p>Call Any Time</p>
               <p>2-965-871-8617</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="border-y border-gray-700/50 ">
+
+      {/* Middle block with border */}
+      <div className="border-y border-gray-700/50">
         <div className="max-w-7xl mx-auto">
-          <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-gray-700/50">
+          <div className="py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {/* Column 1 */}
             <div className="space-y-10">
               <div>
                 <div className="flex flex-row justify-start items-center gap-2 mb-2">
                   <FaLocationDot className="text-brand size-5" />
                   <h1 className="text-xl font-semibold">Address</h1>
                 </div>
-                <p className="text-base  leading-relaxed text-neutral-400 hover:text-brand cursor-pointer">
+                <p className="text-sm sm:text-base leading-relaxed text-neutral-400 hover:text-brand cursor-pointer">
                   House 168/170, Avenue 01, Mirpur DOHS, Dhaka Bangladesh
                 </p>
               </div>
+
               <div>
                 <div className="flex flex-row justify-start items-center gap-2 mb-2">
                   <BsFillSendFill className="text-brand size-5" />
                   <h1 className="text-xl font-semibold">Say Hello</h1>
                 </div>
-                <p className="text-base leading-relaxed text-neutral-400 hover:text-brand cursor-pointer">
+                <p className="text-sm sm:text-base leading-relaxed text-neutral-400 hover:text-brand cursor-pointer">
                   ifo@example.com
                 </p>
-                <p className="text-base leading-relaxed text-neutral-400 hover:text-brand cursor-pointer">
+                <p className="text-sm sm:text-base leading-relaxed text-neutral-400 hover:text-brand cursor-pointer">
                   ifo@example.com
                 </p>
               </div>
@@ -72,136 +77,88 @@ export default function Footer() {
                 </form>
               </div>
             </div>
+
+            {/* Column 2 */}
             <div className="flex flex-col items-start lg:items-center">
               <div>
                 <h1 className="text-2xl font-semibold text-white mb-5">
                   Our Solutions
                 </h1>
-                <div className="flex flex-col space-y-2">
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                <div className="flex flex-col space-y-2 text-sm sm:text-base">
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Web Development
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Mobile Development
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Cloud Services
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Network Connectivity
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Data analytics
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Software Development
                   </Link>
                 </div>
               </div>
             </div>
+
+            {/* Column 3 */}
             <div className="flex flex-col items-start lg:items-center">
               <div>
                 <h1 className="text-2xl font-semibold text-white mb-5">
                   Our Solutions
                 </h1>
-                <div className="flex flex-col space-y-2">
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                <div className="flex flex-col space-y-2 text-sm sm:text-base">
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Web Development
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Mobile Development
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Cloud Services
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Network Connectivity
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Data analytics
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Software Development
                   </Link>
                 </div>
               </div>
             </div>
+
+            {/* Column 4 */}
             <div className="flex flex-col items-start lg:items-center">
               <div>
                 <h1 className="text-2xl font-semibold text-white mb-5">
                   Our Solutions
                 </h1>
-                <div className="flex flex-col space-y-2">
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                <div className="flex flex-col space-y-2 text-sm sm:text-base">
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Web Development
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Mobile Development
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Cloud Services
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Network Connectivity
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Data analytics
                   </Link>
-                  <Link
-                    href="/"
-                    className="text-neutral-400 hover:text-brand cursor-pointer"
-                  >
+                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
                     Software Development
                   </Link>
                 </div>
@@ -210,9 +167,11 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center gap-5 py-5 ">
-          <p className="text-sm">
+
+      {/* Bottom bar */}
+      <div className="max-w-7xl mx-auto px-0 sm:px-2">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-5 py-5">
+          <p className="text-xs sm:text-sm text-center sm:text-left">
             ©Copyright 2025 <b>Softconic</b> | Design By <b>Naimul</b>
           </p>
           <SocialLinks classNameButton="border-none bg-black w-5 h-7" />
