@@ -125,12 +125,14 @@ export function RightImage({ index }: { index: number }) {
                 src={s.image}
                 alt={`Hero ${i + 1}`}
                 fill
-                quality={1000}
+                quality={100}
+                sizes="(min-width: 1280px) 500px, 380px"
                 className={cn(
                   "absolute inset-0 object-cover transition-opacity duration-1200 ease-in-out",
                   index === i ? "opacity-100" : "opacity-0"
                 )}
                 priority={i === 0}
+                
               />
             ))}
           </div>

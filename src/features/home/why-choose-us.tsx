@@ -1,10 +1,13 @@
 "use client";
 
-import { useRef, useState, type MouseEvent } from "react";
 import Image from "next/image";
-import ChooseImageOne from "@/assets/img/home-6/choose-img-1.png";
 import { Logo } from "../feedback/logo";
+import ChooseImageOne from "@/assets/img/home-6/choose-img-1.png";
+import ChooseVTopR from "@/assets/img/home-6/choose-vec-top-r.svg";
+import ChooseVecBtmL from "@/assets/img/home-6/choose-vec-btm-l.svg";
+import { MouseMoveImage } from "../feedback/mouse-move-image";
 import { GoArrowUpRight } from "react-icons/go";
+import { TfiLayoutLineSolid } from "react-icons/tfi";
 
 const stats = [
   {
@@ -24,55 +27,17 @@ const stats = [
   },
 ];
 
-type Offset = { x: number; y: number };
-
 export default function WhyChooseUs() {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [offset, setOffset] = useState<Offset>({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const dx = x - centerX;
-    const dy = y - centerY;
-    const maxOffset = 20;
-
-    let newX = 0;
-    let newY = 0;
-
-    // Decide main direction: left/right/top/bottom
-    if (Math.abs(dx) > Math.abs(dy)) {
-      newX = dx > 0 ? maxOffset : -maxOffset;
-      newY = 0;
-    } else {
-      newY = dy > 0 ? maxOffset : -maxOffset;
-      newX = 0;
-    }
-
-    setOffset({ x: newX, y: newY });
-  };
-
-  const handleMouseLeave = () => {
-    setOffset({ x: 0, y: 0 });
-  };
-
   return (
-    <section className="py-20" aria-labelledby="why-choose-us-heading">
-      <div className="max-w-6xl mx-auto px-4 lg:px-0">
+    <section className="pt-5 pb-20 " aria-labelledby="why-choose-us-heading">
+      <div className="max-w-6xl mx-auto px-5 sm:px-10">
         {/* Top heading + image */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
-          <div className="w-full lg:w-5/12">
-            <p className="text-brand text-sm tracking-[0.25em] uppercase mb-3">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-8">
+          <div className="w-full">
+            <div className="text-brand text-sm tracking-[0.25em] uppercase mb-3 flex flex-row items-center justify-start gap-2">
+              <TfiLayoutLineSolid />
               Why Choose Us
-            </p>
+            </div>
             <h2
               id="why-choose-us-heading"
               className="text-white text-2xl lg:text-4xl font-semibold leading-tight"
@@ -82,37 +47,29 @@ export default function WhyChooseUs() {
               Of Your Business.
             </h2>
           </div>
-
-          <div
-            ref={containerRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative z-30 w-full lg:w-7/12 mx-auto lg:mx-0"
-          >
-            <div
-              className="transition-transform duration-200 ease-out will-change-transform translate-x-5 translate-y-5"
-              style={{
-                transform: `translate(calc(${offset.x}px + 1.25rem), calc(${offset.y}px + 1.25rem))`,
-              }}
-            >
-              <Image
-                src={ChooseImageOne}
-                alt="Team collaborating in modern office"
-                className="w-full h-auto"
-                width={400}
-                height={400}
-                priority
-              />
-            </div>
-          </div>
+          <MouseMoveImage movingImage={ChooseImageOne} />
         </div>
 
-        {/* Bottom content */}
-        <div className="mt-10 flex flex-col lg:flex-row gap-8 justify-center lg:items-end w-full">
-          {/* Left card */}
-          <div className="relative overflow-hidden rounded-2xl p-8 sm:p-10 shadow-2xl shadow-gray-800 w-full lg:w-7/12">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#10b98115,transparent_55%)] pointer-events-none" />
-            <div className="relative space-y-6">
+        <div className="mt-14 lg:mt-0 flex flex-col lg:flex-row gap-8 justify-center lg:items-center w-full ">
+          <div className="relative overflow-hidden  w-full lg:w-7/12 ">
+            <Image
+              src={ChooseVecBtmL}
+              alt="Decor Top Right"
+              width={120}
+              height={120}
+              className="pointer-events-none select-none absolute top-0 right-0 w-20"
+            />
+
+            <Image
+              src={ChooseVTopR}
+              alt="Decor Bottom Left"
+              width={120}
+              height={120}
+              className="pointer-events-none select-none absolute bottom-0 w-20"
+            />
+
+            {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#10b98115,transparent_55%)] pointer-events-none" /> */}
+            <div className="relative space-y-6 p-10 bg-gray-600/20">
               <Logo />
 
               <h3 className="text-2xl sm:text-3xl text-white font-medium">
@@ -163,7 +120,6 @@ export default function WhyChooseUs() {
             </div>
           </div>
 
-          {/* Right stats column */}
           <div className="space-y-10 p-2 sm:p-5 w-full lg:w-5/12">
             {stats.map((item) => (
               <div

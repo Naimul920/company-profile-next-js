@@ -170,6 +170,7 @@ function SolutionCard({ solution }: { solution: Solution }) {
               fill
               sizes="40px"
               className="object-cover"
+              quality={90}
             />
           </div>
         </div>
