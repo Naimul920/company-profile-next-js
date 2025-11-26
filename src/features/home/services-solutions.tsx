@@ -63,7 +63,7 @@ export default function ServicesSolutions() {
           </div>
 
           <h2 className="text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
-            Services &amp; Solutions
+            Services & Solutions
           </h2>
         </div>
 

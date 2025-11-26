@@ -21,8 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={saira.className}>
-      <body className={`${saira.className} antialiased text-white bg-brand-dark pt-20`}>
-        <Navbar />
+      <body className={`${saira.className} antialiased text-white bg-brand-dark `}>
+        <Navbar/>
         {children}
         <Footer />
       </body>

@@ -1,19 +1,20 @@
-import Collaborators from "@/features/home/collaborators";
 import HeroCarousel from "@/features/home/hero-carousel";
+import ComplitedProjects from "@/features/home/complited-projects";
 import ServicesSolutions from "@/features/home/services-solutions";
-// import { ServicesSolutions } from "@/features/home/services-solutions";
-// import ServicesSolutions from "@/features/home/services-solutions";
-import SolutionsCarousel from "@/features/home/solutions-carousel";
 import WhyChooseUs from "@/features/home/why-choose-us";
 
 export default function Home() {
   return (
     <>
-      <HeroCarousel />
+       <HeroCarousel /> 
+       <WhyChooseUs/>
+      <ServicesSolutions/>
+      <ComplitedProjects/> 
+
+
+
       {/* <Collaborators /> */}
       {/* <SolutionsCarousel /> */}
-      <WhyChooseUs/>
-      <ServicesSolutions/>
     </>
   );
 }

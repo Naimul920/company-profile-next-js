@@ -85,22 +85,40 @@ export default function Footer() {
                   Our Solutions
                 </h1>
                 <div className="flex flex-col space-y-2 text-sm sm:text-base">
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
                     Web Development
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
                     Mobile Development
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
                     Cloud Services
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
                     Network Connectivity
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
                     Data analytics
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
                     Software Development
                   </Link>
                 </div>
@@ -111,26 +129,44 @@ export default function Footer() {
             <div className="flex flex-col items-start lg:items-center">
               <div>
                 <h1 className="text-2xl font-semibold text-white mb-5">
-                  Our Solutions
+                  Company
                 </h1>
                 <div className="flex flex-col space-y-2 text-sm sm:text-base">
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Web Development
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    About Us
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Mobile Development
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Case Study
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Cloud Services
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    News & Article
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Network Connectivity
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Our Team
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Data analytics
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    All Portfolio
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Software Development
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Pricing Plan
                   </Link>
                 </div>
               </div>
@@ -140,26 +176,44 @@ export default function Footer() {
             <div className="flex flex-col items-start lg:items-center">
               <div>
                 <h1 className="text-2xl font-semibold text-white mb-5">
-                  Our Solutions
+                  Resources
                 </h1>
                 <div className="flex flex-col space-y-2 text-sm sm:text-base">
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Web Development
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Support Area
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Mobile Development
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Support Policy
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Cloud Services
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Terms & Conditions
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Network Connectivity
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Privacy Policy
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Data analytics
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Career
                   </Link>
-                  <Link href="/" className="text-neutral-400 hover:text-brand cursor-pointer">
-                    Software Development
+                  <Link
+                    href="/"
+                    className="text-neutral-400 hover:text-brand cursor-pointer"
+                  >
+                    Pricing Plan
                   </Link>
                 </div>
               </div>

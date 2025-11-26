@@ -29,7 +29,10 @@ const stats = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="pt-5 pb-20 " aria-labelledby="why-choose-us-heading">
+    <section
+      className="pt-5 pb-20 bg-brand-two"
+      aria-labelledby="why-choose-us-heading"
+    >
       <div className="max-w-6xl mx-auto px-5 sm:px-10">
         {/* Top heading + image */}
         <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center gap-8">

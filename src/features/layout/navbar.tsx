@@ -3,6 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import {
@@ -14,7 +15,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
 
 import { BsFillSendFill } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -51,53 +51,60 @@ type NavMap = Record<string, NavNode[]>;
 
 const NAV: NavMap = {
   Home: [
-    { label: "Home 01", href: "/" },
-    { label: "Home 02", href: "/home-02" },
-    { label: "Home 03", href: "/home-03" },
+    { label: "Home", href: "/" },
+    // { label: "Home 02", href: "/home-02" },
+    // { label: "Home 03", href: "/home-03" },
   ],
-  About: [{ label: "About", href: "/about" }],
-  Service: [
-    { label: "Service 01", href: "/service-01" },
-    { label: "Service 02", href: "/service-02" },
-    { label: "Service 03", href: "/service-03" },
-    { label: "Service 04", href: "/service-04" },
-    { label: "Service Details", href: "/service-details" },
-  ],
+  Service: [{ label: "Service", href: "/service" }],
   Project: [
-    { label: "Project Grid", href: "/projects" },
-    { label: "Project List", href: "/projects/list" },
-    { label: "Project Details", href: "/project/details" },
+    { label: "Project", href: "/project" },
+    // { label: "Service 02", href: "/service-02" },
+    // { label: "Service 03", href: "/service-03" },
+    // { label: "Service 04", href: "/service-04" },
+    // { label: "Service Details", href: "/service-details" },
   ],
-  Pages: [
-    {
-      label: "Team",
-      items: [
-        { label: "Team 01", href: "/team-01" },
-        { label: "Team 02", href: "/team-02" },
-        { label: "Team 03", href: "/team-03" },
-      ],
-    },
-    {
-      label: "Pricing",
-      items: [
-        { label: "Pricing 01", href: "/pricing-01" },
-        { label: "Pricing 02", href: "/pricing-02" },
-      ],
-    },
-    { label: "Contact", href: "/contact" },
-    { label: "FAQs", href: "/faq" },
-    { label: "Error 404", href: "/404" },
+  "About Us": [
+    { label: "About Us", href: "/about-us" },
+    // { label: "Project List", href: "/projects/list" },
+    // { label: "Project Details", href: "/project/details" },
   ],
-  "Case Study": [
-    { label: "All Case Studies", href: "/case-studies" },
-    { label: "By Industry", href: "/case-studies/industry" },
-    { label: "Case Study Details", href: "/case-study/details" },
+  Solutions: [
+    { label: "Solutions", href: "/solutions" },
+    // {
+    //   label: "Solutions",
+    //   items: [
+    //     { label: "Team 01", href: "/team-01" },
+    //     { label: "Team 02", href: "/team-02" },
+    //     { label: "Team 03", href: "/team-03" },
+    //   ],
+    // },
+    // {
+    //   label: "Pricing",
+    //   items: [
+    //     { label: "Pricing 01", href: "/pricing-01" },
+    //     { label: "Pricing 02", href: "/pricing-02" },
+    //   ],
+    // },
+
+    // { label: "FAQs", href: "/faq" },
+    // { label: "Error 404", href: "/404" },
   ],
+  // "Case Study": [
+  //   { label: "All Case Studies", href: "/case-studies" },
+  //   { label: "By Industry", href: "/case-studies/industry" },
+  //   { label: "Case Study Details", href: "/case-study/details" },
+  // ],
   Blog: [
-    { label: "Blog Grid", href: "/blog" },
-    { label: "Blog List", href: "/blog/list" },
-    { label: "Tags", href: "/blog/tags" },
-    { label: "Post Details", href: "/blog/post" },
+    { label: "Blog", href: "/blog" },
+    // { label: "Blog List", href: "/blog/list" },
+    // { label: "Tags", href: "/blog/tags" },
+    // { label: "Post Details", href: "/blog/post" },
+  ],
+  "Contact Us": [
+    { label: "Contact Us", href: "/contact-us" },
+    // { label: "Blog List", href: "/blog/list" },
+    // { label: "Tags", href: "/blog/tags" },
+    // { label: "Post Details", href: "/blog/post" },
   ],
 };
 
@@ -145,13 +152,13 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full border-b border-gray-700/50  backdrop-blur-lg transition-colors duration-500",
+        "fixed inset-x-0 top-0 z-50 w-full border-b border-gray-700/50  backdrop-blur-lg transition-colors duration-500 ",
         scrolled && "bg-black/90"
       )}
     >
       <div
         className={cn(
-          "mx-auto max-w-[1500px] px-4 lg:px-0 lg:max-w-[calc(100%-8rem)] lg:border-x lg:border-gray-700/50",
+          "mx-auto max-w-[1500px] px-4 lg:px-10 lg:max-w-[calc(100%-8rem)] lg:border-x lg:border-gray-700/50 ",
           scrolled && "lg:border-transparent"
         )}
       >
@@ -250,9 +257,7 @@ function InfoSheet() {
 
           <div className="space-y-3 pt-4">
             <h3 className="text-xl font-semibold">Follow Us</h3>
-            <p className="text-sm text-white/70">
-              Follow us on Social Network
-            </p>
+            <p className="text-sm text-white/70">Follow us on Social Network</p>
             <SocialLinks />
           </div>
         </div>
@@ -326,7 +331,9 @@ function MobileMenu() {
 
         <SheetHeader className="sr-only">
           <SheetTitle>Mobile Navigation Menu</SheetTitle>
-          <SheetDescription>Navigate through the website sections</SheetDescription>
+          <SheetDescription>
+            Navigate through the website sections
+          </SheetDescription>
         </SheetHeader>
 
         <nav className="flex flex-col">
@@ -528,7 +535,7 @@ function DesktopNav() {
 
           return (
             <NavigationMenuItem key={group} className="relative">
-              <NavigationMenuTrigger 
+              <NavigationMenuTrigger
                 className={cn(
                   "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   group === "Home"
