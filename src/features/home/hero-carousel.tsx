@@ -69,7 +69,7 @@ export default function HeroCarousel() {
           />
         </div>
 
-        <div className="relative flex  gap-10 w-full flex-row items-center justify-between p-10  ">
+        <div className="relative flex justify-around gap-10 flex-row p-10 ">
           <LeftContent />
           <RightImage index={index} />
         </div>
@@ -83,13 +83,13 @@ export default function HeroCarousel() {
 /* ------------------------------------------------------------------ */
 function LeftContent() {
   return (
-    <div className="z-10 flex flex-col justify-center px-5 sm:px-10 lg:px-0 w-1/2">
-      <h1 className="text-4xl font-extrabold leading-tight">
+    <div className="z-10 flex flex-col justify-center px-5 sm:px-10 lg:px-0  ">
+      <h1 className="text-6xl font-extrabold leading-tight">
         Grow Your Business <br /> With Innovative Ideas.
       </h1>
 
       <p className="mt-2 lg:mt-8 text-sm leading-relaxed text-white/70">
-        Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero.
+        Duis a orci nunc. Suspendisse ac convallis sapien, quis commodo libero. <br />
         Donec nec duomoi luctus, pellentesque lacus sed, mollis going leo.
       </p>
 
@@ -114,10 +114,10 @@ function LeftContent() {
 
 export function RightImage({ index }: { index: number }) {
   return (
-    <div className="hidden lg:block w-1/2">
-      <div className="relative flex justify-end gap-6">
+    <div className="hidden lg:block  ">
+      <div className="relative gap-6">
         {/* Circular image area */}
-        <div className="group relative z-10 mr-0  h-[500px] w-full xl:h-[650px] shrink-0 overflow-hidden rounded-2xl">
+        <div className="group relative z-10 mr-0  h-[500px] w-[500px]  shrink-0 overflow-hidden rounded-2xl">
           {IMAGES.map((s, i) => (
             <Image
               key={i}
