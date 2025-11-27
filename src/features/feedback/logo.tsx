@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import CompanyLogo from "@/assets/img/logo.svg";
+// import CompanyLogo from "@/assets/img/logo.svg";
+import CompanyLogo from "@/assets/img/logo.png";
 
 export function Logo({ className }: { className?: string }) {
   return (

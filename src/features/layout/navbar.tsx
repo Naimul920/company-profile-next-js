@@ -522,8 +522,8 @@ function DesktopNav() {
                     className={cn(
                       "px-3 py-2 transition-colors",
                       group === "Home"
-                        ? "text-emerald-400"
-                        : "text-white/90 hover:text-emerald-400"
+                        ? "text-brand"
+                        : "text-white/90 hover:text-brand"
                     )}
                   >
                     {group}

@@ -56,10 +56,10 @@ export default function ServicesSolutions() {
     <section className="py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-0">
         <div className="mb-12 flex flex-col items-center text-center sm:mb-16">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-[2px] border border-emerald-500/70 px-6 py-2 text-[11px] uppercase tracking-[0.22em] text-emerald-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          <div className="mb-5 inline-flex items-center gap-2 rounded-[2px] border border-brand/70 px-6 py-2 text-[11px] uppercase tracking-[0.22em] text-brand">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
             <span>Solutions We Offer</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
           </div>
 
           <h2 className="text-3xl font-semibold text-white sm:text-4xl lg:text-5xl">
@@ -90,14 +90,14 @@ function ServiceCard({ title, description, icon: Icon }: ServiceCardProps) {
         "group relative flex h-full flex-col justify-between",
         "rounded-[6px] border border-[#202327] bg-[#05070C] px-8 py-9",
         "shadow-[0_0_0_1px_rgba(255,255,255,0.03)]",
-        "transition duration-300 hover:border-emerald-400/80 hover:bg-[#050b11] hover:shadow-[0_0_40px_rgba(6,216,137,0.25)]"
+        "transition duration-300 hover:border-brand/80 hover:bg-[#050b11] hover:shadow-[0_0_40px_rgba(6,216,137,0.25)]"
       )}
     >
       <div className="space-y-6">
         <div className="relative inline-flex h-16 w-16 items-center justify-center">
-          <span className="pointer-events-none absolute h-16 w-16 rounded-full bg-emerald-500/25 blur-xl opacity-0 transition-opacity group-hover:opacity-100" />
-          <span className="pointer-events-none absolute h-12 w-12 rounded-full border border-emerald-400/60 bg-emerald-500/10" />
-          <Icon className="relative z-10 h-7 w-7 text-emerald-400" />
+          <span className="pointer-events-none absolute h-16 w-16 rounded-full bg-brand/25 blur-xl opacity-0 transition-opacity group-hover:opacity-100" />
+          <span className="pointer-events-none absolute h-12 w-12 rounded-full border border-brand/60 bg-brand/10" />
+          <Icon className="relative z-10 h-7 w-7 text-brand" />
         </div>
 
         <div className="space-y-3">

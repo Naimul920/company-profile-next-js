@@ -44,7 +44,12 @@
 
   /******* Custom Color ********/
 
-  --color-brand: #06d889;
+  /* --color-brand: #06d889;
+  --color-brand-dark: #1B1B1B;
+  --color-brand-two: #1B1F23; */
+
+
+  --color-brand: #144788;
   --color-brand-dark: #1B1B1B;
   --color-brand-two: #1B1F23;
 }

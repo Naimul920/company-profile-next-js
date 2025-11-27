@@ -70,7 +70,7 @@ export default function Footer() {
                   />
                   <Button
                     type="submit"
-                    className="flex h-11 w-11 items-center justify-center bg-emerald-400 text-black transition-colors hover:bg-emerald-300 rounded-l-none"
+                    className="flex h-11 w-11 items-center justify-center bg-brand text-black transition-colors hover:bg-brand/70 rounded-l-none"
                   >
                     <ArrowUpRight className="h-4 w-4" />
                   </Button>
@@ -226,7 +226,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-0 sm:px-2">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-5 py-5">
           <p className="text-xs sm:text-sm text-center sm:text-left">
-            ©Copyright 2025 <b>Softconic</b> | Design By <b>Naimul</b>
+            ©Copyright 2025 <b>Digital Wheel</b> | Design By <b>Naimul</b>
           </p>
           <SocialLinks classNameButton="border-none bg-black w-5 h-7" />
         </div>

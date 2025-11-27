@@ -78,7 +78,7 @@ export default function CompletedProjects() {
         {/* Header row */}
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center mb-16 px-10">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold text-white leading-tight">
+            <h2 className=" text-2xl md:text-4xl font-bold text-white leading-tight">
               Complited Projects
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-gray-500">
@@ -133,8 +133,8 @@ export default function CompletedProjects() {
                 className={cn(
                   "transition-all duration-300 rounded-full",
                   i === activeIndex
-                    ? "h-2.5 w-2.5 bg-emerald-400 ring-4 ring-emerald-400/20"
-                    : "h-2.5 w-2.5 bg-transparent border-2 border-gray-600 hover:border-emerald-400/50"
+                    ? "h-2.5 w-2.5 bg-brand ring-4 ring-brand/20"
+                    : "h-2.5 w-2.5 bg-transparent border-2 border-brand hover:border-brand/50"
                 )}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -201,7 +201,7 @@ function ProjectCard({
           <button
             type="button"
             aria-label="View project"
-            className="group absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-emerald-400 text-black transition-transform duration-300 hover:bg-emerald-500 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111319]"
+            className="group absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-brand text-black transition-transform duration-300 hover:bg-brand active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
           >
             <GoArrowDownRight className="text-lg transition-transform duration-200 group-hover:-rotate-45" />
           </button>
