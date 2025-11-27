@@ -69,7 +69,7 @@ export default function HeroCarousel() {
           />
         </div>
 
-        <div className="relative flex  w-full flex-row items-center justify-between p-10  ">
+        <div className="relative flex  gap-10 w-full flex-row items-center justify-between p-10  ">
           <LeftContent />
           <RightImage index={index} />
         </div>
@@ -83,7 +83,7 @@ export default function HeroCarousel() {
 /* ------------------------------------------------------------------ */
 function LeftContent() {
   return (
-    <div className="z-10 flex flex-col justify-center w-full  px-5 sm:px-10 lg:px-0 ">
+    <div className="z-10 flex flex-col justify-center px-5 sm:px-10 lg:px-0 w-1/2">
       <h1 className="text-4xl font-extrabold leading-tight">
         Grow Your Business <br /> With Innovative Ideas.
       </h1>
@@ -114,10 +114,10 @@ function LeftContent() {
 
 export function RightImage({ index }: { index: number }) {
   return (
-    <div className="hidden lg:block">
+    <div className="hidden lg:block w-1/2">
       <div className="relative flex justify-end gap-6">
         {/* Circular image area */}
-        <div className="group relative z-10 mr-0 mt-10 h-[500px] w-[500px] xl:h-[650px] xl:w-[650px] shrink-0 overflow-hidden rounded-full">
+        <div className="group relative z-10 mr-0  h-[500px] w-full xl:h-[650px] shrink-0 overflow-hidden rounded-2xl">
           {IMAGES.map((s, i) => (
             <Image
               key={i}
@@ -136,7 +136,7 @@ export function RightImage({ index }: { index: number }) {
         </div>
 
         {/* Circular preview with image + play icon (opens video) */}
-        <div className="h-min w-min">
+        {/* <div className="h-min w-min">
           <Dialog modal={false}>
             <DialogTrigger asChild>
               <button
@@ -174,7 +174,7 @@ export function RightImage({ index }: { index: number }) {
               </div>
             </DialogContent>
           </Dialog>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -10,10 +10,8 @@ export function Logo({ className }: { className?: string }) {
       <Image
         src={CompanyLogo}
         alt="Company Logo"
-        // Keep these close to the actual visual size you want
         width={192}
         height={48}
-        // Critical element: load immediately to avoid layout jump
         priority
         className={cn("h-10 w-48", className)}
       />
