@@ -84,7 +84,7 @@ export default function HeroCarousel() {
 function LeftContent() {
   return (
     <div className="z-10 flex flex-col justify-center px-5 sm:px-10 lg:px-0  ">
-      <h1 className="text-6xl font-extrabold leading-tight">
+      <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
         Grow Your Business <br /> With Innovative Ideas.
       </h1>
 

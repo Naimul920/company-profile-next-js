@@ -4,6 +4,7 @@ import ServicesSolutions from "@/features/home/services-solutions";
 import WhyChooseUs from "@/features/home/why-choose-us";
 import TeamMembers from "@/features/home/team-members";
 import ChoosePlan from "@/features/home/choose-plan";
+import Contact from "@/features/home/contact";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <ComplitedProjects />
       <TeamMembers />
       <ChoosePlan/>
+      <Contact/>
 
       {/* <Collaborators /> */}
       {/* <SolutionsCarousel /> */}

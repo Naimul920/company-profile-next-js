@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 // import CompanyLogo from "@/assets/img/logo.svg";
 import CompanyLogo from "@/assets/img/logo.png";
+// import CompanyLogo from "@/assets/img/1968x36 (1).png";
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -11,7 +12,7 @@ export function Logo({ className }: { className?: string }) {
         src={CompanyLogo}
         alt="Company Logo"
         width={192}
-        height={48}
+        height={40}
         priority
         className={cn("h-10 w-48", className)}
       />
