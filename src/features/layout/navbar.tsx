@@ -158,14 +158,14 @@ export default function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto max-w-[1500px] px-4 lg:px-10 lg:max-w-[calc(100%-8rem)] lg:border-x lg:border-gray-700/50 ",
+          "mx-auto max-w-[1500px] px-4 lg:px-10 lg:max-w-[calc(100%-8rem)] lg:border-x lg:border-gray-700/50 py-2",
           scrolled && "lg:border-transparent"
         )}
       >
-        <header className="flex items-center justify-between py-4">
-          <div className="px-2">
+        <header className="flex items-center justify-between ">
+          
             <Logo />
-          </div>
+          
 
           {/* Desktop nav */}
           <nav className="hidden lg:block">

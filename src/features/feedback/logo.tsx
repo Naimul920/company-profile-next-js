@@ -14,7 +14,7 @@ export function Logo({ className }: { className?: string }) {
         width={192}
         height={40}
         priority
-        className={cn("h-10 w-48", className)}
+        className={cn("", className)}
       />
     </Link>
   );
