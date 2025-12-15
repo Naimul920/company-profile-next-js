@@ -8,6 +8,7 @@ import ChooseVecBtmL from "@/assets/img/home-6/choose-vec-btm-l.svg";
 import { MouseMoveImage } from "../feedback/mouse-move-image";
 import { GoArrowUpRight } from "react-icons/go";
 import { TfiLayoutLineSolid } from "react-icons/tfi";
+import { Button } from "@/components/ui/button";
 
 const stats = [
   {
@@ -91,8 +92,7 @@ export default function WhyChooseUs() {
                 <p className="text-5xl sm:text-6xl font-extrabold text-gray-500/40">
                   #1
                 </p>
-
-                <button
+                <Button
                   type="button"
                   className="
                     group relative inline-flex items-center justify-center
@@ -118,7 +118,7 @@ export default function WhyChooseUs() {
                     <GoArrowUpRight className="text-lg transition-transform duration-300 group-hover:rotate-45" />
                     <span>About More</span>
                   </span>
-                </button>
+                </Button>
               </div>
             </div>
           </div>

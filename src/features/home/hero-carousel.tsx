@@ -1,13 +1,14 @@
 "use client";
-
-import { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ButtonLink } from "../feedback/button-link";
+import { SocialLinks } from "../feedback/social-link";
+import { useEffect, useState } from "react";
+
 import { GoArrowUpRight } from "react-icons/go";
 import { CiPlay1 } from "react-icons/ci";
 
-import { ButtonLink } from "../feedback/button-link";
-import { SocialLinks } from "../feedback/social-link";
 import { cn } from "@/lib/utils";
 import {
   Dialog,
@@ -67,24 +68,7 @@ export default function HeroCarousel() {
   }, []);
 
   return (
-    <section className="relative pt-20">
-      {/* Left dots (optional) */}
-      {/* <div className="absolute left-6 top-1/2 z-30 -translate-y-1/2 space-y-6">
-        {SLIDES.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setIndex(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            className={cn(
-              "block h-3 w-3 rounded-full border transition",
-              i === index
-                ? "bg-emerald-400 border-emerald-400"
-                : "border-white/30 hover:bg-white/30"
-            )}
-          />
-        ))}
-      </div> */}
-
+    <section className="relative ">
       {/* Main layout container */}
       <div className="mx-auto border-gray-700/50 lg:max-w-[calc(100%-8rem)] lg:border-x">
         {/* Right social icons */}
@@ -137,7 +121,7 @@ function LeftContent({ slide }: { slide: Slide }) {
         <div className="h-min w-min">
           <Dialog modal={false}>
             <DialogTrigger asChild>
-              <button
+              <Button
                 className="group relative z-20 grid h-32 w-32 place-items-center overflow-hidden rounded-full border border-white/20 bg-transparent p-0 transition hover:border-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 xl:h-44 xl:w-44"
                 aria-label="Play video"
               >
@@ -155,7 +139,7 @@ function LeftContent({ slide }: { slide: Slide }) {
                 <div className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/20" />
 
                 <CiPlay1 className="relative z-10 text-white transition-transform duration-300 group-hover:scale-110" />
-              </button>
+              </Button>
             </DialogTrigger>
 
             <DialogContent className="border-0 bg-transparent p-0">

@@ -1,4 +1,6 @@
 "use client";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsFillSendFill } from "react-icons/bs";
@@ -6,8 +8,6 @@ import { Logo } from "../feedback/logo";
 import { SocialLinks } from "../feedback/social-link";
 import { ArrowUpRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 export default function Footer() {
   return (

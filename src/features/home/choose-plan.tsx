@@ -1,9 +1,8 @@
 "use client";
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FiCheck, FiX } from "react-icons/fi";
 import { ButtonLink } from "../feedback/button-link";
+import { useState } from "react";
+import { FiCheck, FiX } from "react-icons/fi";
 
 type Billing = "monthly" | "yearly";
 
@@ -123,29 +122,26 @@ export default function ChoosePlan() {
         {/* Billing toggle */}
         <div className="flex justify-center mb-14">
           <div className="inline-flex items-center rounded-full bg-[#05070b] p-1 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
-            <button
-              onClick={() => setBilling("monthly")}
+            <Button onClick={() => setBilling("monthly")}
               className={`px-6 py-2 text-sm font-semibold rounded-full transition ${
                 billing === "monthly"
                   ? "bg-[#1f2933] text-white shadow"
                   : "text-gray-400"
-              }`}
-            >
-              Billed Monthly
-            </button>
-            <button
-              onClick={() => setBilling("yearly")}
+              }`}>
+Billed Monthly
+            </Button>
+            <Button onClick={() => setBilling("yearly")}
               className={`relative px-6 py-2 text-sm font-semibold rounded-full transition ${
                 billing === "yearly"
                   ? "bg-[#1f2933] text-white shadow"
                   : "text-gray-400"
-              }`}
-            >
-              Billed Yearly
+              }`}>
+Billed Yearly
               <span className="ml-2 rounded-full bg-brand px-2 py-0.5 text-[10px] font-semibold text-black">
                 20% OFF
               </span>
-            </button>
+            </Button>
+            
           </div>
         </div>
 

@@ -1,20 +1,20 @@
-// features/layout/navbar.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 import { BsFillSendFill } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
@@ -24,10 +24,9 @@ import { MapPin, Phone, Mail, ChevronRight, X, Plus } from "lucide-react";
 import { SocialLinks } from "../feedback/social-link";
 import { ButtonLink } from "../feedback/button-link";
 import { Logo } from "../feedback/logo";
-import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
-/* Types & data                                                       */
+/* Data                                                               */
 /* ------------------------------------------------------------------ */
 
 const CONTACT_INFO = {
@@ -36,79 +35,53 @@ const CONTACT_INFO = {
   emails: ["info@example.com", "info@support.com"],
 } as const;
 
-type NavLeaf = {
+type NavItem = {
   label: string;
-  href: string;
+  href?: string; // present when it's a clickable link
+  children?: NavItem[]; // present when it has a submenu
 };
 
-type NavNode = {
-  label: string;
-  items?: NavLeaf[];
-  href?: string;
-};
+const NAV_ITEMS: NavItem[] = [
+  { label: "Home", href: "/" },
+  {
+    label: "Service",
+    children: [
+      {
+        label: "Web Development",
+        children: [
+          { label: "Ecommerce", href: "/service/web-development/ecommerce" },
+          { label: "Accounting", href: "/service/web-development/accounting" },
+          { label: "POS", href: "/service/web-development/pos" },
+        ],
+      },
+      {
+        label: "test",
+        children: [
+          { label: "Ecommerce", href: "/service/web-development/ecommerce" },
+         
+        ],
+      },
+      {
+        label: "test2",
+        children: [
+          { label: "Ecommerce", href: "/service/web-development/ecommerce" },
+          { label: "Accounting", href: "/service/web-development/accounting" },
+          
+        ],
+      },
+    ],
+  },
+  { label: "Project", href: "/project" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact Us", href: "/contact-us" },
+];
 
-type NavMap = Record<string, NavNode[]>;
+/* ------------------------------------------------------------------ */
+/* Radix re-exports                                                   */
+/* ------------------------------------------------------------------ */
 
-const NAV: NavMap = {
-  Home: [
-    { label: "Home", href: "/" },
-    // { label: "Home 02", href: "/home-02" },
-    // { label: "Home 03", href: "/home-03" },
-  ],
-  Service: [{ label: "Service", href: "/service" }],
-  Project: [
-    { label: "Project", href: "/project" },
-    // { label: "Service 02", href: "/service-02" },
-    // { label: "Service 03", href: "/service-03" },
-    // { label: "Service 04", href: "/service-04" },
-    // { label: "Service Details", href: "/service-details" },
-  ],
-  "About Us": [
-    { label: "About Us", href: "/about-us" },
-    // { label: "Project List", href: "/projects/list" },
-    // { label: "Project Details", href: "/project/details" },
-  ],
-  Solutions: [
-    { label: "Solutions", href: "/solutions" },
-    // {
-    //   label: "Solutions",
-    //   items: [
-    //     { label: "Team 01", href: "/team-01" },
-    //     { label: "Team 02", href: "/team-02" },
-    //     { label: "Team 03", href: "/team-03" },
-    //   ],
-    // },
-    // {
-    //   label: "Pricing",
-    //   items: [
-    //     { label: "Pricing 01", href: "/pricing-01" },
-    //     { label: "Pricing 02", href: "/pricing-02" },
-    //   ],
-    // },
-
-    // { label: "FAQs", href: "/faq" },
-    // { label: "Error 404", href: "/404" },
-  ],
-  // "Case Study": [
-  //   { label: "All Case Studies", href: "/case-studies" },
-  //   { label: "By Industry", href: "/case-studies/industry" },
-  //   { label: "Case Study Details", href: "/case-study/details" },
-  // ],
-  Blog: [
-    { label: "Blog", href: "/blog" },
-    // { label: "Blog List", href: "/blog/list" },
-    // { label: "Tags", href: "/blog/tags" },
-    // { label: "Post Details", href: "/blog/post" },
-  ],
-  "Contact Us": [
-    { label: "Contact Us", href: "/contact-us" },
-    // { label: "Blog List", href: "/blog/list" },
-    // { label: "Tags", href: "/blog/tags" },
-    // { label: "Post Details", href: "/blog/post" },
-  ],
-};
-
-/* convenience re-exports for readability */
 const NavigationMenu = NavigationMenuPrimitive.Root;
 const NavigationMenuList = NavigationMenuPrimitive.List;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
@@ -117,7 +90,7 @@ const NavigationMenuContent = NavigationMenuPrimitive.Content;
 const NavigationMenuLink = NavigationMenuPrimitive.Link;
 
 /* ------------------------------------------------------------------ */
-/* Hook: breakpoint                                                   */
+/* Hooks                                                              */
 /* ------------------------------------------------------------------ */
 
 function useIsDesktop(min = 1024) {
@@ -134,48 +107,71 @@ function useIsDesktop(min = 1024) {
   return isDesktop;
 }
 
+function useScrolled(threshold = 50) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > threshold);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [threshold]);
+
+  return scrolled;
+}
+
 /* ------------------------------------------------------------------ */
-/* Navbar root                                                        */
+/* Helpers                                                            */
+/* ------------------------------------------------------------------ */
+
+function isActivePath(pathname: string, href?: string) {
+  if (!href) return false;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
+}
+
+function findFirstLink(item?: NavItem): string | undefined {
+  if (!item) return undefined;
+  if (item.href) return item.href;
+  if (!item.children?.length) return undefined;
+  for (const c of item.children) {
+    const found = findFirstLink(c);
+    if (found) return found;
+  }
+  return undefined;
+}
+
+/* ------------------------------------------------------------------ */
+/* Navbar                                                             */
 /* ------------------------------------------------------------------ */
 
 export default function Navbar() {
   const isDesktop = useIsDesktop();
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const scrolled = useScrolled();
 
   return (
     <div
       className={cn(
-        "fixed inset-x-0 top-0 z-50 w-full border-b border-gray-700/50  backdrop-blur-lg transition-colors duration-500 ",
+        "fixed inset-x-0 top-0 z-50 w-full border-b border-gray-700/50 backdrop-blur-lg transition-colors duration-500",
         scrolled && "bg-black/90"
       )}
     >
       <div
         className={cn(
-          "mx-auto max-w-[1500px] px-4 lg:px-10 lg:max-w-[calc(100%-8rem)] lg:border-x lg:border-gray-700/50 py-2",
+          "mx-auto max-w-[1500px] px-4 py-2 lg:max-w-[calc(100%-8rem)] lg:border-x lg:border-gray-700/50 lg:px-10",
           scrolled && "lg:border-transparent"
         )}
       >
-        <header className="flex items-center justify-between ">
-          
-            <Logo />
-          
+        <header className="flex items-center justify-between">
+          <Logo />
 
-          {/* Desktop nav */}
           <nav className="hidden lg:block">
-            <DesktopNav />
+            <DesktopNav items={NAV_ITEMS} />
           </nav>
 
-          {/* Right actions */}
           <div className="flex items-center gap-3">
             <InfoSheet />
-            {!isDesktop && <MobileMenu />}
+            {!isDesktop && <MobileMenu items={NAV_ITEMS} />}
           </div>
         </header>
       </div>
@@ -184,12 +180,12 @@ export default function Navbar() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Info sheet (right drawer icon)                                     */
+/* Right info sheet                                                   */
 /* ------------------------------------------------------------------ */
 
 function InfoSheet() {
   return (
-    <Sheet>
+    <Sheet modal={false}>
       <SheetTrigger asChild>
         <Button
           variant="info"
@@ -203,24 +199,9 @@ function InfoSheet() {
 
       <SheetContent
         side="right"
-        className="border-gray-700 bg-[#020617] text-white overflow-y-auto pb-10"
+        className="overflow-y-auto border-gray-700 bg-[#020617] p-5 pt-10 text-white"
       >
-        <div className="flex items-center justify-between px-6 pt-20">
-          <div className="flex w-full items-center justify-between gap-3">
-            <Logo />
-
-            <SheetClose asChild>
-              <Button
-                variant="info"
-                size="lg"
-                aria-label="Close"
-                className="h-8 w-8 rounded-full p-0"
-              >
-                <X className="size-5" />
-              </Button>
-            </SheetClose>
-          </div>
-        </div>
+        <Logo />
 
         <div className="space-y-10 px-6 pt-8">
           <SheetTitle className="sr-only">Contact Information</SheetTitle>
@@ -281,6 +262,8 @@ function ContactItem({
         variant="info"
         size="lg"
         className="mr-1 h-10 w-10 rounded-full border border-emerald-400/60 bg-transparent text-emerald-400 hover:bg-emerald-500/10"
+        aria-hidden
+        tabIndex={-1}
       >
         {icon}
       </Button>
@@ -292,19 +275,14 @@ function ContactItem({
 }
 
 /* ------------------------------------------------------------------ */
-/* Mobile menu                                                        */
+/* Mobile menu (recursive)                                            */
 /* ------------------------------------------------------------------ */
 
-function MobileMenu() {
+function MobileMenu({ items }: { items: NavItem[] }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [openGroup, setOpenGroup] = useState<string | null>(null);
-
-  const handleToggleGroup = (group: string) => {
-    setOpenGroup((prev) => (prev === group ? null : group));
-  };
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+    <Sheet open={isOpen} onOpenChange={setIsOpen} modal={false}>
       <SheetTrigger asChild>
         <Button
           variant="info"
@@ -323,34 +301,22 @@ function MobileMenu() {
 
       <SheetContent
         side="left"
-        className="w-[280px] max-w-[85vw] border-0 bg-[#020617] p-0 text-white overflow-y-auto"
+        className="w-[280px] max-w-[85vw] overflow-y-auto border-0 bg-[#020617] p-0 text-white"
       >
-        <div className="px-6 pt-8 pb-4">
+        <div className="px-6 pb-4 pt-8">
           <Logo />
         </div>
 
         <SheetHeader className="sr-only">
           <SheetTitle>Mobile Navigation Menu</SheetTitle>
-          <SheetDescription>
-            Navigate through the website sections
-          </SheetDescription>
+          <SheetDescription>Navigate through the website sections</SheetDescription>
         </SheetHeader>
 
         <nav className="flex flex-col">
           <div className="flex-1 py-2">
-            {Object.entries(NAV).map(([group, nodes]) => (
-              <MobileNavGroup
-                key={group}
-                group={group}
-                nodes={nodes}
-                isOpen={openGroup === group}
-                onToggle={() => handleToggleGroup(group)}
-                onNavigate={() => setIsOpen(false)}
-              />
-            ))}
+            <MobileTree items={items} onNavigate={() => setIsOpen(false)} />
           </div>
 
-          {/* bottom info */}
           <div className="space-y-2 border-t border-gray-800 py-4">
             <div className="flex items-center gap-3 px-4 text-emerald-400">
               <MdPhoneInTalk className="size-6" />
@@ -381,152 +347,130 @@ function MobileMenu() {
   );
 }
 
-function MobileNavGroup({
-  group,
-  nodes,
-  isOpen,
-  onToggle,
+function MobileTree({
+  items,
   onNavigate,
+  level = 0,
 }: {
-  group: string;
-  nodes: NavNode[];
-  isOpen: boolean;
-  onToggle: () => void;
+  items: NavItem[];
   onNavigate: () => void;
+  level?: number;
 }) {
-  const [openSub, setOpenSub] = useState<string | null>(null);
+  const pathname = usePathname();
+  const [open, setOpen] = useState<Record<string, boolean>>({});
 
-  const hasChildren =
-    nodes.some((n) => n.items && n.items.length > 0) || nodes.length > 1;
-
-  const isSingleWithoutChildren =
-    nodes.length === 1 && !nodes[0].items?.length && !!nodes[0].href;
-
-  // single, simple link (e.g. About)
-  if (isSingleWithoutChildren) {
-    return (
-      <Link
-        href={nodes[0].href!}
-        onClick={onNavigate}
-        className={cn(
-          "flex w-full items-center justify-between px-6 py-3 text-left text-[15px] font-medium transition-colors",
-          group === "Home"
-            ? "text-emerald-400"
-            : "text-white hover:text-emerald-400"
-        )}
-      >
-        <span>{group}</span>
-      </Link>
-    );
-  }
+  const pad = level === 0 ? "px-6" : level === 1 ? "px-8" : "px-10";
+  const text =
+    level === 0
+      ? "text-[15px] font-medium"
+      : level === 1
+      ? "text-[14px] text-white/80"
+      : "text-[13px] text-white/70";
 
   return (
-    <div>
-      {/* main group row */}
-      <button
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        className={cn(
-          "flex w-full items-center justify-between px-6 py-3 text-left text-[15px] font-medium transition-colors",
-          group === "Home"
-            ? "text-emerald-400"
-            : "text-white hover:text-emerald-400"
-        )}
-      >
-        <span>{group}</span>
-        {hasChildren && (
-          <Plus
-            className={cn(
-              "h-5 w-5 transition-transform",
-              isOpen && "rotate-45"
-            )}
-          />
-        )}
-      </button>
+    <div className={cn(level > 0 && "bg-[#050816]")}>
+      {items.map((item) => {
+        const hasChildren = !!item.children?.length;
+        const href = item.href ?? findFirstLink(item);
+        const active = isActivePath(pathname, item.href);
 
-      {/* submenu */}
-      {hasChildren && isOpen && (
-        <div className="bg-[#020617] pb-2">
-          {nodes.map((node) =>
-            node.items?.length ? (
-              <div key={node.label}>
-                <button
-                  onClick={() =>
-                    setOpenSub((prev) =>
-                      prev === node.label ? null : node.label
-                    )
-                  }
-                  aria-expanded={openSub === node.label}
-                  className="flex w-full items-center justify-between px-6 py-2 text-left text-[14px] text-white/80 transition-colors hover:text-emerald-400"
-                >
-                  <span>{node.label}</span>
-                  <Plus
-                    className={cn(
-                      "h-4 w-4 transition-transform",
-                      openSub === node.label && "rotate-45"
-                    )}
-                  />
-                </button>
+        if (!hasChildren && item.href) {
+          return (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={onNavigate}
+              className={cn(
+                "flex w-full items-center justify-between py-3 transition-colors",
+                pad,
+                text,
+                active ? "text-emerald-400" : "text-white hover:text-emerald-400"
+              )}
+            >
+              <span>{item.label}</span>
+            </Link>
+          );
+        }
 
-                {openSub === node.label && (
-                  <div className="bg-[#050816]">
-                    {node.items.map((leaf) => (
-                      <Link
-                        key={leaf.label}
-                        href={leaf.href}
-                        className="block px-8 py-2.5 text-[13px] text-white/70 transition-colors hover:text-emerald-400"
-                        onClick={onNavigate}
-                      >
-                        {leaf.label}
-                      </Link>
-                    ))}
-                  </div>
+        return (
+          <div key={item.label}>
+            <button
+              onClick={() =>
+                setOpen((prev) => ({ ...prev, [item.label]: !prev[item.label] }))
+              }
+              aria-expanded={!!open[item.label]}
+              className={cn(
+                "flex w-full items-center justify-between py-3 transition-colors",
+                pad,
+                text,
+                active ? "text-emerald-400" : "text-white hover:text-emerald-400"
+              )}
+            >
+              <span>{item.label}</span>
+              <Plus
+                className={cn(
+                  "h-5 w-5 transition-transform",
+                  open[item.label] && "rotate-45"
                 )}
+              />
+            </button>
+
+            {open[item.label] && item.children && (
+              <div className="pb-2">
+                {/* Optional "View all" */}
+                {href && (
+                  <Link
+                    href={href}
+                    onClick={onNavigate}
+                    className={cn(
+                      "block py-2 transition-colors",
+                      level === 0 ? "px-8 text-[13px]" : "px-10 text-[12px]",
+                      "text-white/60 hover:text-emerald-400"
+                    )}
+                  >
+                    View all {item.label}
+                  </Link>
+                )}
+                <MobileTree
+                  items={item.children}
+                  onNavigate={onNavigate}
+                  level={level + 1}
+                />
               </div>
-            ) : (
-              <Link
-                key={node.label}
-                href={node.href ?? "#"}
-                className="block px-6 py-2 text-[14px] text-white/80 transition-colors hover:text-emerald-400"
-                onClick={onNavigate}
-              >
-                {node.label}
-              </Link>
-            )
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* Desktop nav (Radix NavigationMenu)                                 */
+/* Desktop nav                                                        */
 /* ------------------------------------------------------------------ */
 
-function DesktopNav() {
+function DesktopNav({ items }: { items: NavItem[] }) {
+  const pathname = usePathname();
+
   return (
     <NavigationMenu className="relative">
       <NavigationMenuList className="flex items-center gap-6 text-sm font-medium">
-        {Object.entries(NAV).map(([group, nodes]) => {
-          const isSimpleLink =
-            nodes.length === 1 && !nodes[0].items?.length && !!nodes[0].href;
+        {items.map((item) => {
+          const hasChildren = !!item.children?.length;
+          const active = isActivePath(pathname, item.href);
 
-          if (isSimpleLink) {
-            const href = nodes[0].href!;
+          if (!hasChildren && item.href) {
             return (
-              <NavigationMenuItem key={group}>
+              <NavigationMenuItem key={item.label}>
                 <NavigationMenuLink asChild>
                   <Link
-                    href={href}
+                    href={item.href}
                     className={cn(
                       "px-3 py-2 transition-colors",
-                      group === "Home"
-                        ? "text-brand"
-                        : "text-white/90 hover:text-brand"
+                      active ? "text-emerald-400" : "text-white/90 hover:text-emerald-400"
                     )}
                   >
-                    {group}
+                    {item.label}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -534,25 +478,24 @@ function DesktopNav() {
           }
 
           return (
-            <NavigationMenuItem key={group} className="relative">
+            <NavigationMenuItem key={item.label} className="relative">
               <NavigationMenuTrigger
                 className={cn(
                   "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  group === "Home"
+                  active
                     ? "text-emerald-400"
                     : "text-white/90 hover:text-emerald-400 data-[state=open]:text-emerald-400"
                 )}
               >
-                {group}
+                {item.label}
                 <span className="ml-1">▾</span>
               </NavigationMenuTrigger>
 
-              {/* IMPORTANT FIX: no asChild around NestedPanel / SimplePanel */}
               <NavigationMenuContent className="absolute left-0 top-full mt-4">
-                {group === "Pages" ? (
-                  <NestedPanel nodes={nodes} />
+                {item.label === "Service" ? (
+                  <DesktopNestedPanel root={item} />
                 ) : (
-                  <SimplePanel nodes={nodes} />
+                  <DesktopSimplePanel root={item} />
                 )}
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -563,55 +506,66 @@ function DesktopNav() {
   );
 }
 
-function SimplePanel({ nodes }: { nodes: NavNode[] }) {
+function DesktopSimplePanel({ root }: { root: NavItem }) {
+  const nodes = root.children ?? [];
   return (
     <div className="w-64 rounded-md border border-gray-200 bg-white text-gray-900 shadow-xl">
       <ul className="p-2">
-        {nodes.map((node) => (
-          <li key={node.label}>
-            <NavigationMenuLink asChild>
-              <Link
-                href={node.href ?? "#"}
-                className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 hover:text-emerald-500"
-              >
-                {node.label}
-              </Link>
-            </NavigationMenuLink>
-          </li>
-        ))}
+        {nodes.map((n) => {
+          const href = n.href ?? findFirstLink(n) ?? "#";
+          return (
+            <li key={n.label}>
+              <NavigationMenuLink asChild>
+                <Link
+                  href={href}
+                  className="block rounded-md px-3 py-2 text-sm hover:bg-gray-100 hover:text-emerald-500"
+                >
+                  {n.label}
+                </Link>
+              </NavigationMenuLink>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 }
 
-function NestedPanel({ nodes }: { nodes: NavNode[] }) {
-  const firstWithChildren = nodes.find((n) => n.items && n.items.length);
-  const [active, setActive] = useState(
-    firstWithChildren?.label ?? nodes[0].label
+function DesktopNestedPanel({ root }: { root: NavItem }) {
+  const groups = root.children ?? [];
+  const first = groups[0];
+
+  const initialActive = useMemo(
+    () => first?.label ?? "Service",
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
-  const activeItems = nodes.find((n) => n.label === active)?.items ?? [];
+  const [active, setActive] = useState(initialActive);
+
+  const activeGroup = groups.find((g) => g.label === active) ?? first;
+  const children = activeGroup?.children ?? [];
 
   return (
     <div className="flex rounded-md border border-gray-200 bg-white text-gray-900 shadow-xl">
-      {/* left column: categories */}
       <ul className="w-56 divide-y divide-gray-100">
-        {nodes.map((item) => {
-          const isActive = item.label === active;
-          const hasChildren = !!item.items?.length;
+        {groups.map((g) => {
+          const isActive = g.label === active;
+          const hasChildren = !!g.children?.length;
+          const href = g.href ?? findFirstLink(g) ?? "#";
 
           return (
-            <li key={item.label}>
+            <li key={g.label}>
               {hasChildren ? (
                 <button
-                  onMouseEnter={() => setActive(item.label)}
-                  onFocus={() => setActive(item.label)}
+                  onMouseEnter={() => setActive(g.label)}
+                  onFocus={() => setActive(g.label)}
                   className={cn(
                     "flex w-full items-center justify-between px-4 py-3 text-left text-sm hover:bg-gray-50",
                     isActive &&
                       "border-l-2 border-emerald-400 bg-emerald-50 text-emerald-600"
                   )}
                 >
-                  <span>{item.label}</span>
+                  <span>{g.label}</span>
                   <ChevronRight
                     className={cn(
                       "h-4 w-4",
@@ -622,10 +576,10 @@ function NestedPanel({ nodes }: { nodes: NavNode[] }) {
               ) : (
                 <NavigationMenuLink asChild>
                   <Link
-                    href={item.href ?? "#"}
+                    href={href}
                     className="flex w-full items-center justify-between px-4 py-3 text-sm hover:bg-gray-50"
                   >
-                    <span>{item.label}</span>
+                    <span>{g.label}</span>
                   </Link>
                 </NavigationMenuLink>
               )}
@@ -634,21 +588,23 @@ function NestedPanel({ nodes }: { nodes: NavNode[] }) {
         })}
       </ul>
 
-      {/* right column: children */}
-      {activeItems.length > 0 && (
+      {children.length > 0 && (
         <ul className="w-56 divide-y divide-gray-100 border-l border-gray-100 bg-white">
-          {activeItems.map((leaf) => (
-            <li key={leaf.label}>
-              <NavigationMenuLink asChild>
-                <Link
-                  href={leaf.href}
-                  className="block px-4 py-3 text-sm hover:bg-gray-50 hover:text-emerald-500"
-                >
-                  {leaf.label}
-                </Link>
-              </NavigationMenuLink>
-            </li>
-          ))}
+          {children.map((leaf) => {
+            const href = leaf.href ?? findFirstLink(leaf) ?? "#";
+            return (
+              <li key={leaf.label}>
+                <NavigationMenuLink asChild>
+                  <Link
+                    href={href}
+                    className="block px-4 py-3 text-sm hover:bg-gray-50 hover:text-emerald-500"
+                  >
+                    {leaf.label}
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

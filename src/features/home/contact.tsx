@@ -1,8 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
 
 const STEPS = [
   {
@@ -60,14 +60,12 @@ export default function Contact() {
                   key={step.id}
                   className={`border-b border-white/10 pb-3 last:border-b-0`}
                 >
-                  <button
-                    type="button"
+                  <Button type="button"
                     onClick={() =>
                       setActiveStep((prev) => (prev === step.id ? null : step.id))
                     }
-                    className="flex w-full items-center justify-between py-3 text-left"
-                  >
-                    <span
+                    className="flex w-full items-center justify-between py-3 text-left">
+<span
                       className={`text-sm font-semibold ${
                         isOpen ? "text-brand" : "text-white"
                       }`}
@@ -79,7 +77,8 @@ export default function Contact() {
                     ) : (
                       <FiPlus className="text-gray-400" />
                     )}
-                  </button>
+                  </Button>
+                  
 
                   {isOpen && (
                     <p className="text-xs leading-relaxed text-gray-400 pr-6">

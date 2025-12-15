@@ -1,5 +1,5 @@
 "use client";
-
+import { Button } from "@/components/ui/button";
 import { ButtonLink } from "../feedback/button-link";
 import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
@@ -126,8 +126,8 @@ export default function CompletedProjects() {
 
           {/* Custom Pagination Dots */}
           <div className="flex justify-center items-center gap-2.5 mt-12">
-            {PROJECTS.map((_, i) => (
-              <button
+            {PROJECTS.map((_, i: number) => (
+              <Button
                 key={i}
                 onClick={() => swiperInstance?.slideToLoop(i)}
                 className={cn(
@@ -197,14 +197,13 @@ function ProjectCard({
               {project.title}
             </h3>
           </div>
-
-          <button
+          <Button
             type="button"
             aria-label="View project"
             className="group absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-brand text-black transition-transform duration-300 hover:bg-brand active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-brand"
           >
             <GoArrowDownRight className="text-lg transition-transform duration-200 group-hover:-rotate-45" />
-          </button>
+          </Button>
         </div>
       </div>
     </article>

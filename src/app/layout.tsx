@@ -23,7 +23,9 @@ export default function RootLayout({
     <html lang="en" className={saira.className}>
       <body className={`${saira.className} antialiased text-white bg-brand-dark `}>
         <Navbar/>
-        {children}
+        <div className="pt-28">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

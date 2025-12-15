@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IconType } from "react-icons";
 import {
@@ -106,7 +107,7 @@ function ServiceCard({ title, description, icon: Icon }: ServiceCardProps) {
         </div>
       </div>
 
-      <button
+      <Button
         type="button"
         className="mt-10 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-white"
       >
@@ -114,7 +115,7 @@ function ServiceCard({ title, description, icon: Icon }: ServiceCardProps) {
           <span>Learn More</span>
           <IoIosArrowRoundForward className="size-5 transform transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
-      </button>
+      </Button>
     </article>
   );
 }
