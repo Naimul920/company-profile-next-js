@@ -19,21 +19,18 @@ import { cn } from "@/lib/utils";
 import { BsFillSendFill } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { MdPhoneInTalk } from "react-icons/md";
-import { MapPin, Phone, Mail, ChevronRight, X, Plus } from "lucide-react";
+import { Mail, ChevronRight, X, Plus } from "lucide-react";
 
 import { SocialLinks } from "../feedback/social-link";
 import { ButtonLink } from "../feedback/button-link";
 import { Logo } from "../feedback/logo";
+import { ContactItem } from "../feedback/ContactItem";
 
 /* ------------------------------------------------------------------ */
 /* Data                                                               */
 /* ------------------------------------------------------------------ */
 
-const CONTACT_INFO = {
-  address: "168/170, Avenue 01, Old York Drive Rich Mirpur DOHS, Bangladesh",
-  phones: ["+880 566 1111 985", "+880 657 1111 576"],
-  emails: ["info@example.com", "info@support.com"],
-} as const;
+
 
 type NavItem = {
   label: string;
@@ -213,27 +210,9 @@ function InfoSheet() {
           </SheetDescription>
 
           <div className="space-y-6">
-            <ContactItem icon={<MapPin />} content={CONTACT_INFO.address} />
-            <ContactItem
-              icon={<Phone />}
-              content={
-                <>
-                  {CONTACT_INFO.phones[0]}
-                  <br />
-                  {CONTACT_INFO.phones[1]}
-                </>
-              }
-            />
-            <ContactItem
-              icon={<Mail />}
-              content={
-                <>
-                  {CONTACT_INFO.emails[0]}
-                  <br />
-                  {CONTACT_INFO.emails[1]}
-                </>
-              }
-            />
+            <ContactItem type="address" />
+  <ContactItem type="phone" />
+  <ContactItem type="email" />
           </div>
 
           <div className="space-y-3 pt-4">
@@ -247,32 +226,33 @@ function InfoSheet() {
   );
 }
 
-function ContactItem({
-  icon,
-  content,
-  className,
-}: {
-  icon: React.ReactNode;
-  content: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={cn("flex flex-row gap-3", className)}>
-      <Button
-        variant="info"
-        size="lg"
-        className="mr-1 h-10 w-10 rounded-full border border-emerald-400/60 bg-transparent text-emerald-400 hover:bg-emerald-500/10"
-        aria-hidden
-        tabIndex={-1}
-      >
-        {icon}
-      </Button>
-      <div className="cursor-pointer text-sm text-white/80 hover:text-emerald-400">
-        {content}
-      </div>
-    </div>
-  );
-}
+// export function ContactItem({
+//   icon,
+//   content,
+//   className,
+// }: {
+//   icon?: React.ReactNode;
+//   content?: React.ReactNode;
+//   className?: string;
+// }) {
+
+//   return (
+//     <div className={cn("flex flex-row gap-3", className)}>
+//       <Button
+//         variant="info"
+//         size="lg"
+//         className="mr-1 h-10 w-10 rounded-full border border-emerald-400/60 bg-transparent text-emerald-400 hover:bg-emerald-500/10"
+//         aria-hidden
+//         tabIndex={-1}
+//       >
+//         {icon}
+//       </Button>
+//       <div className="cursor-pointer text-sm text-white/80 hover:text-emerald-400">
+//         {content}
+//       </div>
+//     </div>
+//   );
+// }
 
 /* ------------------------------------------------------------------ */
 /* Mobile menu (recursive)                                            */
