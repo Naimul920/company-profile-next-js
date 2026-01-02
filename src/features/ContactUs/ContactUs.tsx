@@ -6,6 +6,7 @@ import { SocialLinks } from "../feedback/social-link";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Header from "../feedback/Header";
 
 function SectionTag({ children }: { children: React.ReactNode }) {
   return (
@@ -116,9 +117,11 @@ export default function ContactUs() {
   return (
     <div className="bg-[#020617]">
       {/* Header */}
-      <div className="bg-[#0b1220] py-16 text-center">
+      {/* <div className="bg-[#0b1220] py-16 text-center">
         <h2 className="text-4xl font-extrabold text-white">Contact Us</h2>
-      </div>
+      </div> */}
+
+      <Header>Contact Us</Header>
 
       {/* Content */}
       <section className="px-4 py-16">
@@ -160,7 +163,6 @@ export default function ContactUs() {
           </div>
         </div>
       </section>
-
       <GoogleMap />
     </div>
   );

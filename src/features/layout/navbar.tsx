@@ -52,18 +52,20 @@ const NAV_ITEMS: NavItem[] = [
         ],
       },
       {
-        label: "test",
+        label: "Web Development 2",
         children: [
-          { label: "Ecommerce", href: "/service/web-development/ecommerce" },
+          { label: "Ecommerce 2", href: "/service/web-development/ecommerce2" },
+          { label: "Accounting 2", href: "/service/web-development/accounting2" },
+          { label: "POS 2", href: "/service/web-development/pos2" },
          
         ],
       },
-      {
-        label: "test2",
+       {
+        label: "Web Development 3",
         children: [
-          { label: "Ecommerce", href: "/service/web-development/ecommerce" },
-          { label: "Accounting", href: "/service/web-development/accounting" },
-          
+          { label: "Ecommerce 3", href: "/service/web-development/ecommerce3" },
+          { label: "Accounting 3", href: "/service/web-development/accounting3" },
+          { label: "POS 3", href: "/service/web-development/pos3" },
         ],
       },
     ],
@@ -90,19 +92,19 @@ const NavigationMenuLink = NavigationMenuPrimitive.Link;
 /* Hooks                                                              */
 /* ------------------------------------------------------------------ */
 
-function useIsDesktop(min = 1024) {
-  const [isDesktop, setIsDesktop] = useState(false);
+// function useIsDesktop(min = 1024) {
+//   const [isDesktop, setIsDesktop] = useState(false);
 
-  useEffect(() => {
-    const mql = window.matchMedia(`(min-width: ${min}px)`);
-    const onChange = () => setIsDesktop(mql.matches);
-    onChange();
-    mql.addEventListener?.("change", onChange);
-    return () => mql.removeEventListener?.("change", onChange);
-  }, [min]);
+//   useEffect(() => {
+//     const mql = window.matchMedia(`(min-width: ${min}px)`);
+//     const onChange = () => setIsDesktop(mql.matches);
+//     onChange();
+//     mql.addEventListener?.("change", onChange);
+//     return () => mql.removeEventListener?.("change", onChange);
+//   }, [min]);
 
-  return isDesktop;
-}
+//   return isDesktop;
+// }
 
 function useScrolled(threshold = 50) {
   const [scrolled, setScrolled] = useState(false);
@@ -143,7 +145,7 @@ function findFirstLink(item?: NavItem): string | undefined {
 /* ------------------------------------------------------------------ */
 
 export default function Navbar() {
-  const isDesktop = useIsDesktop();
+  // const isDesktop = useIsDesktop();
   const scrolled = useScrolled();
 
   return (
@@ -168,7 +170,11 @@ export default function Navbar() {
 
           <div className="flex items-center gap-3">
             <InfoSheet />
-            {!isDesktop && <MobileMenu items={NAV_ITEMS} />}
+            <div className="lg:hidden">
+  <MobileMenu items={NAV_ITEMS} />
+</div>
+
+            {/* {!isDesktop && <MobileMenu items={NAV_ITEMS} />} */}
           </div>
         </header>
       </div>
@@ -226,33 +232,6 @@ function InfoSheet() {
   );
 }
 
-// export function ContactItem({
-//   icon,
-//   content,
-//   className,
-// }: {
-//   icon?: React.ReactNode;
-//   content?: React.ReactNode;
-//   className?: string;
-// }) {
-
-//   return (
-//     <div className={cn("flex flex-row gap-3", className)}>
-//       <Button
-//         variant="info"
-//         size="lg"
-//         className="mr-1 h-10 w-10 rounded-full border border-emerald-400/60 bg-transparent text-emerald-400 hover:bg-emerald-500/10"
-//         aria-hidden
-//         tabIndex={-1}
-//       >
-//         {icon}
-//       </Button>
-//       <div className="cursor-pointer text-sm text-white/80 hover:text-emerald-400">
-//         {content}
-//       </div>
-//     </div>
-//   );
-// }
 
 /* ------------------------------------------------------------------ */
 /* Mobile menu (recursive)                                            */
@@ -398,19 +377,6 @@ function MobileTree({
             {open[item.label] && item.children && (
               <div className="pb-2">
                 {/* Optional "View all" */}
-                {href && (
-                  <Link
-                    href={href}
-                    onClick={onNavigate}
-                    className={cn(
-                      "block py-2 transition-colors",
-                      level === 0 ? "px-8 text-[13px]" : "px-10 text-[12px]",
-                      "text-white/60 hover:text-emerald-400"
-                    )}
-                  >
-                    View all {item.label}
-                  </Link>
-                )}
                 <MobileTree
                   items={item.children}
                   onNavigate={onNavigate}
