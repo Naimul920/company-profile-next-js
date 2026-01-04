@@ -1,7 +1,9 @@
+import AboutUs from "@/features/AboutUs/AboutUs";
+
 export default function AboutPage() {
   return (
-    <div>
-      this is about page
-    </div>
+    <>
+      <AboutUs/>
+    </>
   )
 }
