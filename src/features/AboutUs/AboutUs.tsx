@@ -1,6 +1,6 @@
 import Header from "../feedback/Header";
-import TeamMembers from "../Home/team-members";
-import WhyChooseUs from "../Home/why-choose-us";
+import TeamMembers from "../home/team-members";
+import WhyChooseUs from "../home/why-choose-us";
 import Approach from "./Approach";
 
 
