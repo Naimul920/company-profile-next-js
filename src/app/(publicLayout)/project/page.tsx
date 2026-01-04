@@ -1,7 +1,9 @@
+import Project from "@/features/Project/Project";
+
 export default function ProjectPage() {
   return (
-    <div>
-      this is project page
-    </div>
+    <>
+      <Project/>
+    </>
   )
 }
