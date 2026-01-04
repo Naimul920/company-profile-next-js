@@ -30,8 +30,6 @@ import { ContactItem } from "../feedback/ContactItem";
 /* Data                                                               */
 /* ------------------------------------------------------------------ */
 
-
-
 type NavItem = {
   label: string;
   href?: string; // present when it's a clickable link
@@ -45,6 +43,7 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       {
         label: "Web Development",
+        href: "/service/web-development",
         children: [
           { label: "Ecommerce", href: "/service/web-development/ecommerce" },
           { label: "Accounting", href: "/service/web-development/accounting" },
@@ -53,19 +52,32 @@ const NAV_ITEMS: NavItem[] = [
       },
       {
         label: "Web Development 2",
+        href: "/service/web-development-2",
         children: [
-          { label: "Ecommerce 2", href: "/service/web-development/ecommerce2" },
-          { label: "Accounting 2", href: "/service/web-development/accounting2" },
-          { label: "POS 2", href: "/service/web-development/pos2" },
-         
+          {
+            label: "Ecommerce 2",
+            href: "/service/web-development-2/ecommerce-2",
+          },
+          {
+            label: "Accounting 2",
+            href: "/service/web-development-2/accounting-2",
+          },
+          { label: "POS 2", href: "/service/web-development-2/pos-2" },
         ],
       },
-       {
+      {
         label: "Web Development 3",
+        href: "/service/web-development-3",
         children: [
-          { label: "Ecommerce 3", href: "/service/web-development/ecommerce3" },
-          { label: "Accounting 3", href: "/service/web-development/accounting3" },
-          { label: "POS 3", href: "/service/web-development/pos3" },
+          {
+            label: "Ecommerce 3",
+            href: "/service/web-development-3/ecommerce-3",
+          },
+          {
+            label: "Accounting 3",
+            href: "/service/web-development-3/accounting-3",
+          },
+          { label: "POS 3", href: "/service/web-development-3/pos-3" },
         ],
       },
     ],
@@ -171,8 +183,8 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <InfoSheet />
             <div className="lg:hidden">
-  <MobileMenu items={NAV_ITEMS} />
-</div>
+              <MobileMenu items={NAV_ITEMS} />
+            </div>
 
             {/* {!isDesktop && <MobileMenu items={NAV_ITEMS} />} */}
           </div>
@@ -217,8 +229,8 @@ function InfoSheet() {
 
           <div className="space-y-6">
             <ContactItem type="address" />
-  <ContactItem type="phone" />
-  <ContactItem type="email" />
+            <ContactItem type="phone" />
+            <ContactItem type="email" />
           </div>
 
           <div className="space-y-3 pt-4">
@@ -231,7 +243,6 @@ function InfoSheet() {
     </Sheet>
   );
 }
-
 
 /* ------------------------------------------------------------------ */
 /* Mobile menu (recursive)                                            */
@@ -268,7 +279,9 @@ function MobileMenu({ items }: { items: NavItem[] }) {
 
         <SheetHeader className="sr-only">
           <SheetTitle>Mobile Navigation Menu</SheetTitle>
-          <SheetDescription>Navigate through the website sections</SheetDescription>
+          <SheetDescription>
+            Navigate through the website sections
+          </SheetDescription>
         </SheetHeader>
 
         <nav className="flex flex-col">
@@ -343,7 +356,9 @@ function MobileTree({
                 "flex w-full items-center justify-between py-3 transition-colors",
                 pad,
                 text,
-                active ? "text-emerald-400" : "text-white hover:text-emerald-400"
+                active
+                  ? "text-emerald-400"
+                  : "text-white hover:text-emerald-400"
               )}
             >
               <span>{item.label}</span>
@@ -355,14 +370,19 @@ function MobileTree({
           <div key={item.label}>
             <button
               onClick={() =>
-                setOpen((prev) => ({ ...prev, [item.label]: !prev[item.label] }))
+                setOpen((prev) => ({
+                  ...prev,
+                  [item.label]: !prev[item.label],
+                }))
               }
               aria-expanded={!!open[item.label]}
               className={cn(
                 "flex w-full items-center justify-between py-3 transition-colors",
                 pad,
                 text,
-                active ? "text-emerald-400" : "text-white hover:text-emerald-400"
+                active
+                  ? "text-emerald-400"
+                  : "text-white hover:text-emerald-400"
               )}
             >
               <span>{item.label}</span>
@@ -413,7 +433,9 @@ function DesktopNav({ items }: { items: NavItem[] }) {
                     href={item.href}
                     className={cn(
                       "px-3 py-2 transition-colors",
-                      active ? "text-emerald-400" : "text-white/90 hover:text-emerald-400"
+                      active
+                        ? "text-emerald-400"
+                        : "text-white/90 hover:text-emerald-400"
                     )}
                   >
                     {item.label}
@@ -481,59 +503,56 @@ function DesktopNestedPanel({ root }: { root: NavItem }) {
   const groups = root.children ?? [];
   const first = groups[0];
 
-  const initialActive = useMemo(
-    () => first?.label ?? "Service",
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-  const [active, setActive] = useState(initialActive);
-
+  const [active, setActive] = useState<string>(first?.label ?? "");
   const activeGroup = groups.find((g) => g.label === active) ?? first;
   const children = activeGroup?.children ?? [];
 
   return (
     <div className="flex rounded-md border border-gray-200 bg-white text-gray-900 shadow-xl">
+      {/* LEFT COLUMN (parents) */}
       <ul className="w-56 divide-y divide-gray-100">
         {groups.map((g) => {
           const isActive = g.label === active;
           const hasChildren = !!g.children?.length;
-          const href = g.href ?? findFirstLink(g) ?? "#";
+
+          // ✅ parent link fallback
+          const parentHref = g.href ?? findFirstLink(g) ?? "#";
 
           return (
             <li key={g.label}>
-              {hasChildren ? (
-                <button
-                  onMouseEnter={() => setActive(g.label)}
-                  onFocus={() => setActive(g.label)}
-                  className={cn(
-                    "flex w-full items-center justify-between px-4 py-3 text-left text-sm hover:bg-gray-50",
-                    isActive &&
-                      "border-l-2 border-emerald-400 bg-emerald-50 text-emerald-600"
-                  )}
+              <div
+                className={cn(
+                  "flex items-center justify-between px-4 py-3 text-sm hover:bg-gray-50",
+                  isActive && "border-l-2 border-emerald-400 bg-emerald-50 text-emerald-600"
+                )}
+                // ✅ hover to open submenu
+                onMouseEnter={() => setActive(g.label)}
+                onFocus={() => setActive(g.label)}
+              >
+                {/* ✅ click to navigate */}
+                <Link
+                  href={parentHref}
+                  className="flex-1 text-left"
                 >
-                  <span>{g.label}</span>
+                  {g.label}
+                </Link>
+
+                {/* right arrow */}
+                {hasChildren && (
                   <ChevronRight
                     className={cn(
-                      "h-4 w-4",
+                      "ml-2 h-4 w-4",
                       isActive ? "text-emerald-500" : "text-gray-400"
                     )}
                   />
-                </button>
-              ) : (
-                <NavigationMenuLink asChild>
-                  <Link
-                    href={href}
-                    className="flex w-full items-center justify-between px-4 py-3 text-sm hover:bg-gray-50"
-                  >
-                    <span>{g.label}</span>
-                  </Link>
-                </NavigationMenuLink>
-              )}
+                )}
+              </div>
             </li>
           );
         })}
       </ul>
 
+      {/* RIGHT COLUMN (children) */}
       {children.length > 0 && (
         <ul className="w-56 divide-y divide-gray-100 border-l border-gray-100 bg-white">
           {children.map((leaf) => {
@@ -556,3 +575,4 @@ function DesktopNestedPanel({ root }: { root: NavItem }) {
     </div>
   );
 }
+

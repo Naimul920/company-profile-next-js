@@ -1,7 +1,9 @@
+import Blog from "@/features/Blog/Blog";
+
 export default function BlogPage() {
   return (
     <>
-      this is my blog page
+      <Blog/>
     </>
   )
 }
