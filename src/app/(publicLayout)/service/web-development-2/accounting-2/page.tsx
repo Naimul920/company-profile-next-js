@@ -1,9 +1,9 @@
-import Header from "@/features/feedback/Header";
+import Accounting from "@/features/Service/WebDevelopment/Accounting/Accounting";
 
 export default function Accounting2Page() {
   return (
-    <div>
-      <Header>Accounting 2</Header>
-    </div>
-  )
+    <>
+      <Accounting />
+    </>
+  );
 }

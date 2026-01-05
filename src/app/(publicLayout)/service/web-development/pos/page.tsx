@@ -1,9 +1,10 @@
 import Header from "@/features/feedback/Header";
+import POS from "@/features/Service/WebDevelopment/POS/POS";
 
 export default function PosPage() {
   return (
-    <div>
-      <Header>Pos</Header>
-    </div>
+    <>
+      <POS/>
+    </>
   )
 }

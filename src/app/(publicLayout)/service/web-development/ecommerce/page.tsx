@@ -1,9 +1,9 @@
-import Header from "@/features/feedback/Header";
+import Ecommerce from "@/features/Service/WebDevelopment/Ecommerce/Ecommerce";
 
 export default function EcommercePage() {
   return (
-    <div>
-    <Header>Ecommerce</Header>
-    </div>
+    <>
+    <Ecommerce/>
+    </>
   )
 }

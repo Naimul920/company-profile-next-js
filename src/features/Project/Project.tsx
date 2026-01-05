@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
 import Header from "../feedback/Header";
 
 import Project01 from "@/assets/img/home-4/work-01.png";
@@ -17,6 +18,7 @@ type Category = "All" | "UI/UX" | "Web Design" | "Developing" | "Graphic Design"
 type Project = {
   id: number;
   title: string;
+  slug: string; // ✅ for details page
   category: Exclude<Category, "All">;
   image: StaticImageData;
 };
@@ -24,13 +26,13 @@ type Project = {
 const CATEGORIES: Category[] = ["All", "UI/UX", "Web Design", "Developing", "Graphic Design"];
 
 const PROJECTS: Project[] = [
-  { id: 1, title: "Terminal Workspace", category: "Developing", image: Project01 },
-  { id: 2, title: "Team Collaboration", category: "Developing", image: Project02 },
-  { id: 3, title: "UI/UX Sketching", category: "UI/UX", image: Project03 },
-  { id: 4, title: "Architecture Web Layout", category: "Web Design", image: Project04 },
-  { id: 5, title: "Code & Coffee", category: "Developing", image: Project05 },
-  { id: 6, title: "Product Presentation", category: "UI/UX", image: Project06 },
-  { id: 7, title: "Minimal Poster", category: "Graphic Design", image: Project07 },
+  { id: 1, title: "Terminal Workspace", slug: "terminal-workspace", category: "Developing", image: Project01 },
+  { id: 2, title: "Team Collaboration", slug: "team-collaboration", category: "Developing", image: Project02 },
+  { id: 3, title: "UI/UX Sketching", slug: "uiux-sketching", category: "UI/UX", image: Project03 },
+  { id: 4, title: "Architecture Web Layout", slug: "architecture-web-layout", category: "Web Design", image: Project04 },
+  { id: 5, title: "Code & Coffee", slug: "code-and-coffee", category: "Developing", image: Project05 },
+  { id: 6, title: "Product Presentation", slug: "product-presentation", category: "UI/UX", image: Project06 },
+  { id: 7, title: "Minimal Poster", slug: "minimal-poster", category: "Graphic Design", image: Project07 },
 ];
 
 type TabProps = {
@@ -64,24 +66,41 @@ function ProjectCard({
   height?: number;
 }) {
   return (
-    <article
-      className={[
-        "rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition",
-        className ?? "",
-      ].join(" ")}
-      style={{ height }}
+    <Link
+      href={`/project/project-details`}
+      aria-label={`Open details for ${project.title}`}
+      className={className}
     >
-      <div className="relative w-full h-full overflow-hidden">
+      <article
+        className={[
+          "group relative overflow-hidden rounded-xl",
+          "border border-zinc-800 bg-zinc-950 hover:border-emerald-500/60 transition",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
+        ].join(" ")}
+        style={{ height }}
+      >
         <Image
           src={project.image}
           alt={project.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition duration-300 hover:scale-[1.03]"
+          className="object-cover transition duration-500 group-hover:scale-[1.05]"
           priority={project.id <= 2}
         />
-      </div>
-    </article>
+
+        {/* Dark gradient overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+        {/* Text */}
+        <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          <p className="text-xs text-emerald-300">{project.category}</p>
+          <h3 className="mt-1 text-lg font-semibold text-white">{project.title}</h3>
+          <p className="mt-1 text-sm text-white/80">
+            View Details <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+          </p>
+        </div>
+      </article>
+    </Link>
   );
 }
 
@@ -93,7 +112,6 @@ export default function Project() {
     return PROJECTS.filter((p) => p.category === activeCategory);
   }, [activeCategory]);
 
-  // Make sure we always have up to 7 items for the collage
   const items = filteredProjects.slice(0, 7);
 
   return (
@@ -104,12 +122,7 @@ export default function Project() {
         {/* Tabs */}
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           {CATEGORIES.map((cat) => (
-            <Tab
-              key={cat}
-              label={cat}
-              active={activeCategory === cat}
-              onClick={setActiveCategory}
-            />
+            <Tab key={cat} label={cat} active={activeCategory === cat} onClick={setActiveCategory} />
           ))}
         </div>
 

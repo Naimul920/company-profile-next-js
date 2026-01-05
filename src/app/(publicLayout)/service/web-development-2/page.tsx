@@ -1,9 +1,9 @@
-import Header from "@/features/feedback/Header";
+import WebDevelopment2 from "@/features/Service/WebDevelopment2/WebDevelopment2";
 
 export default function WebDevelopment2Page() {
   return (
-    <div>
-      <Header>Web Development 2</Header>
-    </div>
+    <>
+      <WebDevelopment2/>
+    </>
   )
 }
